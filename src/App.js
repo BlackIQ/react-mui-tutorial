@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Create, Home } from '@mui/icons-material';
+import Home from './components/home';
+import Create from './components/create';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path={'/'}>
+        <Route exact path='/'>
           <Home />
         </Route>
-        <Route exact path={'/create'}>
+        <Route exact path='/create'>
           <Create />
         </Route>
       </Switch>
