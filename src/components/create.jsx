@@ -1,86 +1,118 @@
 import {
-    Home,
-    KeyboardArrowRight,
-    Menu,
-    Person,
-    Settings,
+    Add,
 } from "@mui/icons-material";
 
 import {
-    Box,
     Button,
     Typography,
-    BottomNavigation,
-    BottomNavigationAction,
-    Paper,
-    AppBar,
-    IconButton,
-    Toolbar
+    Container,
+    TextField,
+    RadioGroup,
+    Radio,
+    FormControlLabel,
+    FormLabel,
+    FormControl
 } from "@mui/material";
 
+import {
+    makeStyles
+} from "@mui/material/styles";
 import { useState } from "react";
 
+// const useStyle = makeStyles({
+//     field: {
+//         marginTop: 20,
+//         marginButtom: 20,
+//         display: "block"
+//     }
+// });
+
 const Create = () => {
-    const [value, setValue] = useState(1);
+    // const classes = useStyle();
+
+    const [name, setName] = useState('');
+    const [details, setDetails] = useState('');
+    const [category, setCategory] = useState('todo');
+
+    const [nameError, setNameError] = useState(false);
+    const [detailsError, setDetailsError] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setNameError(false);
+        setDetailsError(false);
+
+        if (name == '') {
+            setNameError(true);
+        }
+
+        if (details == '') {
+            setDetailsError(true);
+        }
+
+        if (name && details) {
+            console.log(`${name} and ${details} and ${category}`);
+        }
+    }
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <AppBar
-                elevation="0"
-                component="nav"
+        <Container>
+            <Typography
+                color="primary"
+                variant="h3"
+                gutterBottom
             >
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <Menu />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Box
-                component="main"
-                sx={{ pt: 5 }}
-            >
-                <Typography
-                    variant="h4"
-                    component="h2"
+                Create a new task
+            </Typography>
+            <form onSubmit={handleSubmit} autoComplete="off" noValidate>
+                <TextField
+                    onChange={(e) => setName(e.target.value)}
+                    variant="outlined"
                     color="primary"
-                    gutterBottom
-                >
-                    Create a new Todo
-                </Typography>
+                    size="small"
+                    label="Task name"
+                    error={nameError}
+                    required
+                    fullWidth
+                />
+                <br />
+                <br />
+                <TextField
+                    onChange={(e) => setDetails(e.target.value)}
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    label="Task details"
+                    rows={5}
+                    error={detailsError}
+                    multiline
+                    required
+                    fullWidth
+                />
+                <br />
+                <br />
+                <FormControl>
+                    <FormLabel>Category</FormLabel>
+                    <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <FormControlLabel label="Reminder" value="reminder" control={<Radio />} />
+                        <FormControlLabel label="Todo" value="todo" control={<Radio />} />
+                        <FormControlLabel label="Work" value="work" control={<Radio />} />
+                    </RadioGroup>
+                </FormControl>
+                <br />
+                <br />
                 <Button
-                    onClick={() => {}}
-                    variant="contained"
                     type="submit"
+                    variant="contained"
                     color="primary"
-                    endIcon={<KeyboardArrowRight />}
+                    endIcon={<Add />}
                     disableElevation
                 >
                     Create
                 </Button>
-            </Box>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    showLabels
-                    value={value}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
-                    }}
-                >
-                    <BottomNavigationAction label="Recents" icon={<Home />} />
-                    <BottomNavigationAction label="Favorites" icon={<Settings />} />
-                    <BottomNavigationAction label="Nearby" icon={<Person />} />
-                </BottomNavigation>
-            </Paper>
-        </Box>
+            </form>
+        </Container>
     );
 }
 
