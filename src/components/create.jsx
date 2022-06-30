@@ -1,3 +1,6 @@
+import { useState } from "react";
+import Axios from "axios";
+
 import {
     Add,
 } from "@mui/icons-material";
@@ -14,10 +17,7 @@ import {
     FormControl
 } from "@mui/material";
 
-import {
-    makeStyles
-} from "@mui/material/styles";
-import { useState } from "react";
+import { makeStyles } from "@mui/material/styles";
 
 // const useStyle = makeStyles({
 //     field: {
@@ -32,7 +32,7 @@ const Create = () => {
 
     const [name, setName] = useState('');
     const [details, setDetails] = useState('');
-    const [category, setCategory] = useState('todo');
+    const [category, setCategory] = useState('reminder');
 
     const [nameError, setNameError] = useState(false);
     const [detailsError, setDetailsError] = useState(false);
@@ -52,7 +52,19 @@ const Create = () => {
         }
 
         if (name && details) {
-            console.log(`${name} and ${details} and ${category}`);
+            const data = {
+                name,
+                details,
+                category
+            }
+
+            Axios.post('http://localhost:8000/tasks', data)
+                .then(() => {
+                    setName('');
+                    setDetails('');
+                    setCategory('reminder');
+                })
+                .catch((error) => console.log(error));
         }
     }
 
