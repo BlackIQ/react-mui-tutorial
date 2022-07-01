@@ -106,7 +106,7 @@ const Create = () => {
                 <br />
                 <FormControl>
                     <FormLabel>Category</FormLabel>
-                    <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)} row>
                         <FormControlLabel label="Reminder" value="reminder" control={<Radio />} />
                         <FormControlLabel label="Todo" value="todo" control={<Radio />} />
                         <FormControlLabel label="Work" value="work" control={<Radio />} />
