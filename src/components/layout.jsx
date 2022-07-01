@@ -28,6 +28,7 @@ import {
 import { makeStyles } from "@mui/styles";
 
 import { format } from "date-fns";
+import { ClientJS } from "clientjs";
 
 const drawerWidth = 240;
 
@@ -63,6 +64,8 @@ const Layout = (props) => {
     const history = useHistory();
     const location = useLocation();
 
+    const client = new ClientJS();
+
     const list = [
         {
             text: 'Tasks',
@@ -78,7 +81,7 @@ const Layout = (props) => {
 
     const [tab, setTab] = useState(0);
 
-    const mobile = true;
+    const mobile = client.isMobile();
 
     const pages = [
         <Home />,
