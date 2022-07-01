@@ -9,7 +9,8 @@ import {
 
 import {
     Container,
-    Grid
+    Grid,
+    Typography
 } from "@mui/material";
 
 const Home = () => {
@@ -21,19 +22,35 @@ const Home = () => {
             .catch((error) => console.log(error));
     });
 
+    const handleDelete = (id) => {
+        Axios.delete(`http://localhost:8000/tasks/${id}`)
+            .then((result) => console.log("Deleted"))
+            .catch((error) => console.log(error));
+    }
+
     return (
         <Container>
-            <Grid spacing={3} container>
-                {
-                    tasks.map((task) => {
-                        return (
-                            <Grid key={task.id} xs={12} sm={6} md={3} item>
-                                <TaskCard task={task} />
-                            </Grid>
-                        );
-                    })
-                }
-            </Grid>
+            {
+                tasks
+                ?
+                <Grid spacing={3} container>
+                    {
+                        tasks.map((task) => {
+                            return (
+                                <Grid key={task.id} xs={12} sm={6} md={3} item>
+                                    <TaskCard task={task} handleDelete={handleDelete} />
+                                </Grid>
+                            );
+                        })
+                    }
+                </Grid>
+                :
+                <Typography
+                    variant="body1"
+                >
+                    No task is founded.
+                </Typography>
+            }
         </Container>
     );
 }
