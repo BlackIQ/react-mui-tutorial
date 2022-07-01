@@ -30,8 +30,8 @@ import { makeStyles } from "@mui/material/styles";
 const Create = () => {
     // const classes = useStyle();
 
-    const [name, setName] = useState('');
-    const [details, setDetails] = useState('');
+    const [name, setName] = useState([]);
+    const [details, setDetails] = useState([]);
     const [category, setCategory] = useState('reminder');
 
     const [nameError, setNameError] = useState(false);
@@ -43,11 +43,11 @@ const Create = () => {
         setNameError(false);
         setDetailsError(false);
 
-        if (name == '') {
+        if (name === []) {
             setNameError(true);
         }
 
-        if (details == '') {
+        if (details === []) {
             setDetailsError(true);
         }
 
@@ -59,9 +59,9 @@ const Create = () => {
             }
 
             Axios.post('http://localhost:8000/tasks', data)
-                .then(() => {
-                    setName('');
-                    setDetails('');
+                .then((result) => {
+                    setName([]);
+                    setDetails([]);
                     setCategory('reminder');
                 })
                 .catch((error) => console.log(error));
