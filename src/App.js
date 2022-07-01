@@ -7,6 +7,7 @@ import {
 
 import Create from './components/create';
 import Home from './components/home';
+import Layout from './components/layout';
 
 const theme = createTheme({
   typography: {
@@ -22,14 +23,16 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/create'>
-            <Create />
-          </Route>
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/create'>
+              <Create />
+            </Route>
+          </Switch>
+        </Layout>
       </Router>
     </ThemeProvider>
   );
