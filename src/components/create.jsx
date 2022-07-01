@@ -17,21 +17,22 @@ import {
     FormControl
 } from "@mui/material";
 
-import { makeStyles } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
-// const useStyle = makeStyles({
-//     field: {
-//         marginTop: 20,
-//         marginButtom: 20,
-//         display: "block"
-//     }
-// });
+const useStyles = makeStyles((theme) => {
+    return {
+        field: {
+            marginTop: theme.spacing(5),
+            marginButtom: theme.spacing(5),
+        }
+    };
+});
 
 const Create = () => {
-    // const classes = useStyle();
+    const classes = useStyles();
 
-    const [name, setName] = useState([]);
-    const [details, setDetails] = useState([]);
+    const [name, setName] = useState('');
+    const [details, setDetails] = useState('');
     const [category, setCategory] = useState('reminder');
 
     const [nameError, setNameError] = useState(false);
@@ -43,15 +44,15 @@ const Create = () => {
         setNameError(false);
         setDetailsError(false);
 
-        if (name === []) {
+        if (name === '') {
             setNameError(true);
         }
 
-        if (details === []) {
+        if (details === '') {
             setDetailsError(true);
         }
 
-        if (name && details) {
+        if (name !== '' && details !== '') {
             const data = {
                 name,
                 details,
@@ -59,12 +60,12 @@ const Create = () => {
             }
 
             Axios.post('http://localhost:8000/tasks', data)
-                .then((result) => {
-                    setName([]);
-                    setDetails([]);
-                    setCategory('reminder');
-                })
+                .then((result) => {})
                 .catch((error) => console.log(error));
+
+            setName('');
+            setDetails('');
+            setCategory('reminder');
         }
     }
 
@@ -85,6 +86,7 @@ const Create = () => {
                     size="small"
                     label="Task name"
                     error={nameError}
+                    className={classes.field}
                     required
                     fullWidth
                 />
@@ -98,13 +100,16 @@ const Create = () => {
                     label="Task details"
                     rows={5}
                     error={detailsError}
+                    className={classes.field}
                     multiline
                     required
                     fullWidth
                 />
                 <br />
                 <br />
-                <FormControl>
+                <FormControl
+                    className={classes.field}
+                >
                     <FormLabel>Category</FormLabel>
                     <RadioGroup value={category} onChange={(e) => setCategory(e.target.value)} row>
                         <FormControlLabel label="Reminder" value="reminder" control={<Radio />} />
