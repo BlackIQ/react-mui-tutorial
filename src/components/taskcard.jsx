@@ -3,24 +3,44 @@ import {
     CardContent,
     CardHeader,
     CardActions,
+    Avatar,
     Typography,
     IconButton
 } from "@mui/material";
 
 import {
-    MoreVert
+    DeleteOutline
 } from "@mui/icons-material";
+
+import {
+    blue,
+    orange,
+    purple
+} from "@mui/material/colors";
 
 const TaskCard = (props) => {
     const task = props.task;
+    const handleDelete = props.handleDelete;
 
     return (
         <Card
-            elevation={3}
+            variant="outlined"
+            color="primary"
         >
             <CardHeader
                 action = {
-                    <IconButton><MoreVert /></IconButton>
+                    <IconButton onClick={() => handleDelete(task.id)}>
+                        <DeleteOutline />
+                    </IconButton>
+                }
+                avatar = {
+                    <Avatar
+                        sx={{
+                            bgcolor: task.category === "reminder" ? blue[500] : task.category === "work" ? purple[500] : orange[500]
+                        }}
+                    >
+                        {task.category[0].toUpperCase()}
+                    </Avatar>
                 }
                 title={task.name}
                 subheader={task.category}
