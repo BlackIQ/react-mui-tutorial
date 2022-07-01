@@ -13,6 +13,14 @@ import {
     Typography
 } from "@mui/material";
 
+import Masonry from "react-masonry-css";
+
+const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1,
+};
+
 const Home = () => {
     const [tasks, setTasks] = useState([]);
 
@@ -30,27 +38,21 @@ const Home = () => {
 
     return (
         <Container>
+            <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+            >
             {
-                tasks
-                ?
-                <Grid spacing={3} container>
-                    {
-                        tasks.map((task) => {
-                            return (
-                                <Grid key={task.id} xs={12} sm={6} md={3} item>
-                                    <TaskCard task={task} handleDelete={handleDelete} />
-                                </Grid>
-                            );
-                        })
-                    }
-                </Grid>
-                :
-                <Typography
-                    variant="body1"
-                >
-                    No task is founded.
-                </Typography>
-            }
+                    tasks.map((task) => {
+                        return (
+                            <div key={task.id}>
+                                <TaskCard task={task} handleDelete={handleDelete} />
+                            </div>
+                        );
+                    })
+                }
+            </Masonry>
         </Container>
     );
 }
