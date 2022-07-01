@@ -78,14 +78,19 @@ const Layout = (props) => {
 
     const [tab, setTab] = useState(0);
 
-    const mobile = false;
+    const mobile = true;
+
+    const pages = [
+        <Home />,
+        <Create />
+    ];
 
     return (
         <div className={classes.root}>
             <AppBar
                 className={classes.appbar}
                 elevation={0}
-                osition="fixed"
+                position="fixed"
                 sx={
                     !mobile
                     &&
@@ -146,11 +151,7 @@ const Layout = (props) => {
                 {
                     mobile
                     ?
-                    tab === 0
-                    ?
-                    <Home />
-                    :
-                    <Create />
+                    pages[tab]
                     :
                     children
                 }
