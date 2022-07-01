@@ -11,6 +11,11 @@ import Home from './components/home';
 import Layout from './components/layout';
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#ff0000"
+    },
+  },
   typography: {
     fontFamily: "Arima",
     fontWeightLight: 200,
