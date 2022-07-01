@@ -9,6 +9,7 @@ import {
     Add
 } from "@mui/icons-material";
 
+
 import {
     AppBar,
     Toolbar,
@@ -40,6 +41,13 @@ const useStyles = makeStyles((theme) => {
         },
         drawer: {
             width: drawerWidth
+        },
+        drawerHead: {
+            color: "white",
+            paddingLeft: theme.spacing(1),
+            paddingTop: theme.spacing(1),
+            paddingBottom: theme.spacing(1),
+            background: theme.palette.primary.main
         },
         drawerPaper: {
             width: drawerWidth
