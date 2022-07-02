@@ -9,8 +9,6 @@ import {
 
 import {
     Container,
-    Grid,
-    Typography
 } from "@mui/material";
 
 import Masonry from "react-masonry-css";
