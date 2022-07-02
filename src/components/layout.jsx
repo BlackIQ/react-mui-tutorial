@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
+import ColorPick from "./color";
 import Create from './create';
 import Home from './home';
 
 import {
     Home as HomeIcon,
-    Add
+    Add,
+    Brush
 } from "@mui/icons-material";
 
 
@@ -84,6 +86,11 @@ const Layout = (props) => {
             text: 'Add',
             icon: <Add color="primary" />,
             path: '/create'
+        },
+        {
+            text: "Theme",
+            icon: <Brush color="primary" />,
+            path: '/color'
         }
     ];
 
@@ -93,7 +100,8 @@ const Layout = (props) => {
 
     const pages = [
         <Home />,
-        <Create />
+        <Create />,
+        <ColorPick />
     ];
 
     return (
