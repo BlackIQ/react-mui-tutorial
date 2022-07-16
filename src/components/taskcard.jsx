@@ -2,7 +2,6 @@ import {
     Card,
     CardContent,
     CardHeader,
-    CardActions,
     Avatar,
     Typography,
     IconButton
