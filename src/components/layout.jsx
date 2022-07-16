@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-import ColorPick from "./color";
 import Create from './create';
 import Home from './home';
 
 import {
     Home as HomeIcon,
-    Add,
-    Brush
+    Add
 } from "@mui/icons-material";
 
 
@@ -86,11 +84,6 @@ const Layout = (props) => {
             text: 'Add',
             icon: <Add color="primary" />,
             path: '/create'
-        },
-        {
-            text: "Theme",
-            icon: <Brush color="primary" />,
-            path: '/color'
         }
     ];
 
@@ -100,8 +93,7 @@ const Layout = (props) => {
 
     const pages = [
         <Home />,
-        <Create />,
-        <ColorPick />
+        <Create />
     ];
 
     return (
@@ -151,7 +143,7 @@ const Layout = (props) => {
                                         <ListItemButton
                                             Key={item.text}
                                             onClick={() => history.push(item.path)}
-                                            selected={location.pathname === item.path ? true : false}
+                                            selected={location.pathname === item.path}
                                         >
                                             <ListItemIcon>{item.icon}</ListItemIcon>
                                             <ListItemText>{item.text}</ListItemText>
